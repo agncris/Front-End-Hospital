@@ -6,10 +6,10 @@ function Footer() {
       <p>Hospital Sale Sano. Todos los derechos reservados. 2024</p>
       <nav className="footer__nav">
         <ul className="footer__list">
-          <li><a href="index.html" className="footer__link">Inicio</a></li>
-          <li><a href="equipo.html" className="footer__link">Equipo</a></li>
-          <li><a href="contacto.html" className="footer__link">Contacto</a></li>
-          <li><a href="reservar.html" className="footer__link">Reservar una hora</a></li>
+          <li><a href="/" className="footer__link">Inicio</a></li>
+          <li><a href="/equipo" className="footer__link">Equipo</a></li>
+          <li><a href="/contacto" className="footer__link">Contacto</a></li>
+          <li><a href="/reservar" className="footer__link">Reservar una hora</a></li>
         </ul>
       </nav>
       <p className="footer__contacto">Contacto: +569999888777 | Correo: salesano@gmail.com</p><br />
