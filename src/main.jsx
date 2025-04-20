@@ -1,21 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './App';
 import './styles/main.css';
 import { AuthProvider } from './context/AuthContext';
 import { DoctorProvider } from './context/DoctorContext';
 import { AppointmentProvider } from './context/AppointmentContext';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import ErrorBoundary from './ErrorBoundary';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+// Configuración de las banderas futuras
+const router = createBrowserRouter([
+  {
+    path: '/*',
+    element: <App />
+  }
+], {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true
+  }
+});
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ErrorBoundary>
       <AuthProvider>
         <DoctorProvider>
           <AppointmentProvider>
-            <App />
+            <RouterProvider router={router} />
           </AppointmentProvider>
         </DoctorProvider>
       </AuthProvider>
@@ -23,5 +35,16 @@ root.render(
   </React.StrictMode>
 );
 
-// Register service worker
-serviceWorkerRegistration.register();
+// Registrar el service worker solo en producción
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/'
+      });
+      console.log('Service Worker registrado:', registration.scope);
+    } catch (error) {
+      console.error('Error al registrar el Service Worker:', error);
+    }
+  });
+}

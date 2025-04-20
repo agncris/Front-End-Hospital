@@ -1,4 +1,6 @@
 @echo off
-if not exist "public" mkdir "public"
-if not exist "public\assets" mkdir "public\assets"
-if not exist "dist" mkdir "dist"
+mkdir dist 2>nul
+mkdir dist\icons 2>nul
+mkdir dist\assets 2>nul
+copy public\icons\*.* dist\icons\ 2>nul
+copy public\*.* dist\ 2>nul
